@@ -1,15 +1,8 @@
-# tinymediamanager-docker
-
+# tinymediamanagergui V4
+Cloned from https://github.com/romancin/tinymediamanager4-docker
 A repository for creating a docker container including TinyMediaManager with GUI interface.
 
-![docker pulls](https://img.shields.io/docker/pulls/romancin/tinymediamanager.svg) ![docker stars](https://img.shields.io/docker/stars/romancin/tinymediamanager.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X2CT2SWQCP74U)
-
 Latest versions:
-
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v4) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v4) 
-
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v3) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v3) 
-
 
 If you are migrating from v3 to v4, please make a backup before. I recommend you create a new host directory to map the new config, and copy the "/config/data" folder from v3 version to it.
 Take a look at the official upgrade documentation here:
