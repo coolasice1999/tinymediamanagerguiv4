@@ -1,6 +1,6 @@
 name: Build Master
 
-on: [workflow_dispatch]
+on: 
   push:
     branches: 
         - master
