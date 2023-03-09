@@ -4,7 +4,7 @@
 FROM jlesage/baseimage-gui:alpine-3.12-glibc
 
 # Define software versions.
-ARG TMM_VERSION=4.3.4
+ARG TMM_VERSION=4.3.8.1
 
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux-amd64.tar.gz
@@ -23,21 +23,23 @@ RUN \
         libmediainfo \
         ttf-dejavu \
         bash \
+	zstd \
 	zenity && \
     apk --update add tar
 
 # Fix Java Segmentation Fault
-RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
-    && mkdir -p /tmp/libz \
-    && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
-    && cp /tmp/libz/usr/lib/libz.so.1.2.11 /usr/glibc-compat/lib \
+RUN mkdir -p /tmp/libz \
+    && wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz/libz.tar.zst \
+    && unzstd -v /tmp/libz/libz.tar.zst \
+    && tar -xvf /tmp/libz/libz.tar -C /tmp/libz \
+    && cp -v /tmp/libz/usr/lib/libz.so.1.2.13 /usr/glibc-compat/lib \
     && /usr/glibc-compat/sbin/ldconfig \
-    && rm -rf /tmp/libz /tmp/libz.tar.xz
+    && rm -rfv /tmp/libz
 
 # Maximize only the main/initial window.
 # It seems this is not needed for TMM 3.X version.
 #RUN \
-#    sed-patch 's/<application type="normal">/<application type="normal" title="tinyMediaManager \/ 3.0.2">/' \
+#    sed-patch 's/<application type="normal">/<application type="normal" title="tinyMediaManager \/ ${TMM_VERSION}">/' \
 #        /etc/xdg/openbox/rc.xml
 
 # Generate and install favicons.
